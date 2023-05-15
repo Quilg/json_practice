@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Users</title>
+</head>
+<body>
+  <h1>Users</h1>
+  <div id="dataContainer"></div>
+  <script>
+    const dataContainer = document.getElementById('dataContainer');
+    fetch('https://dummyjson.com/users')
+      .then(res => res.json())
+      .then(data => {
+        const users = data.users;
+        const topUsers = users.slice(0, 5);
+        const formattedNames = topUsers.map(user => `<li>First Name: ${user.firstName}, Last Name: ${user.lastName}</li>`);
+        const namesString = formattedNames.join('');
+        const namesList = `<ul>${namesString}</ul>`;
+        dataContainer.innerHTML = namesList;
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+  </script>
+  <a href="index.html">Home</a>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Products</title>
+</head>
+<body>
+  <h1>Products</h1>
+  <div id="products"></div>
+  <script>
+    fetch('https://dummyjson.com/products')
+    .then(res => res.json())
+    .then(data => {
+        const productsContainer = document.getElementById('products');
+        const productsToShow = data.products.slice(0, 5);
+        productsToShow.forEach((product, index) => {
+            const productElement = document.createElement('div');
+            productElement.innerHTML = `<h3>${index + 1}) Title:  ${product.title}</h3>
+                                        <p>Description: ${product.description}</p>
+                                        <p>Price: $${product.price}</p>`;
+            productsContainer.appendChild(productElement);
+        });
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+  </script>
+  <a href="index.html">Home</a>
+</body>
+</html>
