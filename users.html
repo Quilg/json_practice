@@ -12,7 +12,8 @@
       .then(res => res.json())
       .then(data => {
         const users = data.users;
-        const topUsers = users.slice(0, 5);
+        const shuffledUsers = users.sort(() => Math.random() - 0.5);
+        const topUsers = shuffledUsers.slice(0, 5);
         const formattedNames = topUsers.map(user => `<li>First Name: ${user.firstName}, Last Name: ${user.lastName}</li>`);
         const namesString = formattedNames.join('');
         const namesList = `<ul>${namesString}</ul>`;
@@ -21,6 +22,7 @@
       .catch(error => {
         console.error('Error:', error);
       });
+    
   </script>
   <a href="index.html">Home</a>
 </body>

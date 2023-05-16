@@ -11,8 +11,10 @@
     .then(res => res.json())
     .then(data => {
         const productsContainer = document.getElementById('products');
-        const productsToShow = data.products.slice(0, 5);
-        productsToShow.forEach((product, index) => {
+        const products = data.products;
+        const randomProducts = getRandomElements(products, 5);
+        
+        randomProducts.forEach((product, index) => {
             const productElement = document.createElement('div');
             productElement.innerHTML = `<h3>${index + 1}) Title:  ${product.title}</h3>
                                         <p>Description: ${product.description}</p>
@@ -23,6 +25,20 @@
     .catch(error => {
         console.error('Error:', error);
     });
+
+function getRandomElements(array, count) {
+    const shuffled = array.slice();
+    let i = array.length;
+    const min = i - count;
+    let temp, index;
+    while (i-- > min) {
+        index = Math.floor((i + 1) * Math.random());
+        temp = shuffled[index];
+        shuffled[index] = shuffled[i];
+        shuffled[i] = temp;
+    }
+    return shuffled.slice(min);
+}
   </script>
   <a href="index.html">Home</a>
 </body>
